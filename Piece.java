@@ -1,16 +1,14 @@
 import java.util.*;
 
-public class Piece {
+public abstract class Piece {
 
-    private boolean color; //white = true, black = false
-    private int type; //King = 0, Queen = 1, Rook = 2, Bishop = 3, Knight = 4, Pawn = 5
+    protected boolean color; //white = true, black = false
     private boolean captured;
     private Set<int[]> available;
 
 
-    public Piece(boolean color, int type){
+    public Piece(boolean color){
         this.color = color;
-        this.type = type;
         captured = false;
         available = new HashSet<int[]>();
     }
@@ -33,6 +31,6 @@ public class Piece {
     public void setAvailable(Set<int[]> available){
         this.available = available;
     }
-    
 
+    public abstract boolean canMove(Board board, int[] start, int[] end);
 }

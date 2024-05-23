@@ -31,4 +31,7 @@ public class Board {
     public void setPiece(int x, int y, Piece piece){
         board[x][y] = piece;
     }
+    public boolean isUnderAttack(int x, int y, boolean color){
+        
+    }
 }
