@@ -1,16 +1,13 @@
-import java.util.*;
-
 public abstract class Piece {
 
     protected boolean color; //white = true, black = false
-    private boolean captured;
-    private Set<int[]> available;
-
+    protected boolean captured;
+    protected boolean hasMoved;
 
     public Piece(boolean color){
         this.color = color;
         captured = false;
-        available = new HashSet<int[]>();
+        hasMoved = false;
     }
 
     public boolean getColor(){
@@ -19,8 +16,8 @@ public abstract class Piece {
     public boolean getCaptured(){
         return captured;
     }
-    public boolean getAvailable(){
-        return available;
+    public boolean getHasMoved(){
+        return hasMoved;
     }
     public void setColor(boolean color){
         this.color = color;
@@ -28,9 +25,9 @@ public abstract class Piece {
     public void setCaptured(boolean captured){
         this.captured = captured;
     }
-    public void setAvailable(Set<int[]> available){
-        this.available = available;
+    public void setHasMoved(boolean hasMoved){
+        this.hasMoved = hasMoved;
     }
-
-    public abstract boolean canMove(Board board, int[] start, int[] end);
+    
+    public abstract boolean canMove(Board board, int startX, int startY, int endX, int endY, int kingX, int kingY);
 }

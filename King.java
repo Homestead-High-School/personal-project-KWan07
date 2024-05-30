@@ -1,23 +1,81 @@
 public class King extends Piece {
-
-    private boolean inCheck;
-    public boolean hasMoved; //For castling
     
     public King(boolean color){
         super(color);
-        inCheck = false;
-        hasMoved = false;
     }
     public boolean canCastleLeft(Board board){
-        if (color){
-            return !hasMoved && board.getPiece(0, 0) instanceof Rook && !board.getPiece(0, 0).getHasMoved() && board.getPiece(0, 1) == null && board.getPiece(0, 2) == null && board.getPiece(0, 3) == null;
+        if (hasMoved){
+            return false;
         }
-        return !hasMoved && board.getPiece(7, 0) instanceof Rook && !board.getPiece(7, 0).getHasMoved() && board.getPiece(7, 1) == null && board.getPiece(7, 2) == null && board.getPiece(7, 3) == null;
+        if (color){
+            if (board.isUnderAttack(0, 4, true)){
+                return false;
+            }
+            Piece p = board.getPiece(0, 0);
+            if (!(p instanceof Rook) || p.getHasMoved()){
+                return false;
+            }
+            for (int j = 1; j <= 3; j++){
+                if (board.getPiece(0, j) != null || board.isUnderAttack(0, j, true)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        else {
+            if (board.isUnderAttack(7, 4, false)){
+                return false;
+            }
+            Piece p = board.getPiece(7, 0);
+            if (!(p instanceof Rook) || p.getHasMoved()){
+                return false;
+            }
+            for (int j = 1; j <= 3; j++){
+                if (board.getPiece(7, j) != null || board.isUnderAttack(7, j, true)){
+                    return false;
+                }
+            }
+            return true;
+        }
     }
     public boolean canCastleRight(Board board){
-        if (color){
-            return !hasMoved && board.getPiece(0, 0) instanceof Rook && !board.getPiece(0, 0).getHasMoved() && board.getPiece(0, 1) == null && board.getPiece(0, 2) == null && board.getPiece(0, 3) == null;
+        if (hasMoved){
+            return false;
         }
-        return !hasMoved && board.getPiece(7, 0) instanceof Rook && !board.getPiece(7, 0).getHasMoved() && board.getPiece(7, 1) == null && board.getPiece(7, 2) == null && board.getPiece(7, 3) == null;
+        if (color){
+            if (board.isUnderAttack(0, 4, true)){
+                return false;
+            }
+            Piece p = board.getPiece(0, 7);
+            if (!(p instanceof Rook) || p.getHasMoved()){
+                return false;
+            }
+            for (int j = 5; j <= 6; j++){
+                if (board.getPiece(0, j) != null || board.isUnderAttack(0, j, true)){
+                    return false;
+                }
+            }
+            return true;
+        }
+        else {
+            if (board.isUnderAttack(7, 4, false)){
+                return false;
+            }
+            Piece p = board.getPiece(7, 7);
+            if (!(p instanceof Rook) || p.getHasMoved()){
+                return false;
+            }
+            for (int j = 5; j <= 6; j++){
+                if (board.getPiece(7, j) != null || board.isUnderAttack(7, j, true)){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+    @Override
+    public boolean canMove(Board board, int startX, int startY, int endX, int endY, int kingX, int kingY) {
+        return Math.abs(startX - endX) == 1 && Math.abs(startY - endY) == 1 && !board.isUnderAttack(endX, endY, color);
     }
 }
+    

@@ -21,7 +21,7 @@ public class Board {
         board[7][5] = new Bishop(false);
         board[7][6] = new Knight(false);
         board[7][7] = new Rook(false);
-        for (int j = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
             board[6][j] = new Pawn(false);
         }
     }
@@ -32,6 +32,15 @@ public class Board {
         board[x][y] = piece;
     }
     public boolean isUnderAttack(int x, int y, boolean color){
-        
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                if (board[i][j] != null && board[i][j].getColor() != color && board[i][j].canMove(this, i, j, x, y)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
+    
+
 }
