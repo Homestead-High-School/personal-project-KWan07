@@ -29,5 +29,7 @@ public class Board {
                 c = 0;
             }
         }
+        g2.setColor(new Color(102, 102, 153));
+        g2.fillRect(8*SQUARE_SIZE, 0, 3*SQUARE_SIZE, 8*SQUARE_SIZE);
     }
 }

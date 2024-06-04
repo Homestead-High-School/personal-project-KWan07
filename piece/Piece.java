@@ -14,6 +14,8 @@ public class Piece {
     public int x, y;
     public int col, row, preCol, preRow;
     public int color;
+    public boolean moved;
+    public boolean movedTwo, enPassant; //For en passant
 
     public Piece(int color, int col, int row) {
         this.color = color;
@@ -23,6 +25,9 @@ public class Piece {
         y = getY(row);
         preCol = col;
         preRow = row;
+        moved = false;
+        movedTwo = false;
+        enPassant = false;
     }
     public BufferedImage getImage(String imagePath) {
         BufferedImage image = null;
@@ -47,6 +52,9 @@ public class Piece {
         return (y + Board.HALF_SQUARE_SIZE)/Board.SQUARE_SIZE;
     }
     public void updatePosition() {
+        if (Math.abs(row - preRow) == 2) {
+            movedTwo = true;
+        }
         x = getX(col);
         y = getY(row);
         preCol = getCol(x);

@@ -30,7 +30,7 @@ public class Rook extends Piece {
         //Check if rook can move to target square
         return (endCol == preCol) ^ (endRow == preRow);
     }
-    public boolean pathClear(int endCol, int endRow) {
+    private boolean pathClear(int endCol, int endRow) {
         //If moving left
         for (int c = preCol - 1; c > endCol; c--) {
             for (Piece p : GamePanel.simPieces) {
