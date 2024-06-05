@@ -51,6 +51,7 @@ public class Piece {
     public int getRow(int y) {
         return (y + Board.HALF_SQUARE_SIZE)/Board.SQUARE_SIZE;
     }
+    
     public void updatePosition() {
         if (Math.abs(row - preRow) == 2) {
             movedTwo = true;
